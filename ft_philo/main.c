@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/03 12:17:53 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:21:34 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 	ft_printf("Philosophers dead time is\t: %d sec\nPhilosophers eat time is\t: %d sec\nPhilosophers sleep time \t: %d sec\nPhilosophers eat numbers is\t: %d sec\n", philos->time_die, philos->time_eat, philos->time_sleep, philos->eatsnb);
 	philo = philos->philo;
 	i = 0;
-	while (i < philos->nb)
+	while (i <= philos->nb)
 	{
 		ft_printf("Philosopher %d is set up and dies in %d seconds and should eat %d times\n", philo->id, philo->time_die, philo->eatsnb);
 		philo = philo->next;
