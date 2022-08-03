@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 17:48:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/03 11:55:26 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:19:51 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ typedef struct s_philo
 	int				time_sleep;
 	int				eatsnb;
 	struct s_philo	*next;
+	struct s_philo	*prev;
 }	t_philo;
 
 typedef struct s_philosophers
 {
+	int		nb;
 	int		time_die;
 	int		time_eat;
 	int		time_sleep;
@@ -41,6 +43,8 @@ typedef struct s_philosophers
 int				usage(void);
 
 int				check_args(char **av);
+
+t_philo			*philo_addlast(t_philo *philo, t_philosophers *philos, int i);
 
 t_philo			*philo_lstaddback(t_philo *philo, t_philosophers *philos, int i);
 

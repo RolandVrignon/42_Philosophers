@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/03 11:59:23 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:17:53 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	usage(void)
 
 int	main(int ac, char **av)
 {
-	t_philosophers *philos;
-	t_philo *philo;
+	t_philosophers	*philos;
+	t_philo			*philo;
+	int				i;
 	
 	if (ac != 5 && ac != 6)
 		return (usage());
@@ -41,10 +42,12 @@ int	main(int ac, char **av)
 	ft_printf("Philos are setted up\n");
 	ft_printf("Philosophers dead time is\t: %d sec\nPhilosophers eat time is\t: %d sec\nPhilosophers sleep time \t: %d sec\nPhilosophers eat numbers is\t: %d sec\n", philos->time_die, philos->time_eat, philos->time_sleep, philos->eatsnb);
 	philo = philos->philo;
-	while (philo)
+	i = 0;
+	while (i < philos->nb)
 	{
 		ft_printf("Philosopher %d is set up and dies in %d seconds and should eat %d times\n", philo->id, philo->time_die, philo->eatsnb);
 		philo = philo->next;
+		i++;
 	}
 	free_philos(philos);
 	return (0);
