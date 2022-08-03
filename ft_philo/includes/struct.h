@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/03 13:56:39 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:33:58 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 typedef struct s_philo
 {
+	pthread_t		th;
 	int				id;
 	int				time_die;
 	int				time_eat;
