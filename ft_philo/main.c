@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/03 11:01:20 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/03 11:56:48 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	usage(void)
 	return (0);
 }
 
-int	check_args(int ac, char **av)
+int	check_args(char **av)
 {
 	int i;
 	int j;
@@ -51,25 +51,24 @@ int	check_args(int ac, char **av)
 t_philo *philo_lstaddback(t_philo *philo, t_philosophers *philos, int i)
 {
 	t_philo *tmp;
-	t_philo *new_philo;
+	t_philo *first;
 
-	new_philo = philo;
-	while (new_philo->next != NULL)
-		new_philo = new_philo->next;
+	first = philo;
+	while (philo->next != NULL)
+		philo = philo->next;
 	tmp = (t_philo *)malloc(sizeof(t_philo));
 	if (!tmp)
 		return (NULL);
-	tmp = tmp;
 	tmp->id = i + 1;
 	tmp->time_die = philos->time_die;
 	tmp->time_eat = philos->time_eat;
 	tmp->time_sleep = philos->time_sleep;
 	tmp->eatsnb = philos->eatsnb;
-	new_philo->next = tmp;
-	return (philo);
+	philo->next = tmp;
+	return (first);
 }
 
-t_philo *create_philos(int ac, char **av, t_philosophers *philos)
+t_philo *create_philos(char **av, t_philosophers *philos)
 {
 	t_philo *philo;
 	int		i;
@@ -97,7 +96,6 @@ t_philo *create_philos(int ac, char **av, t_philosophers *philos)
 t_philosophers *set_data(int ac, char **av)
 {
 	t_philosophers *philos;
-	int				i;
 
 	philos = (t_philosophers *)malloc(sizeof(t_philosophers));
 	if (!philos)
@@ -109,30 +107,47 @@ t_philosophers *set_data(int ac, char **av)
 		philos->eatsnb = ft_atoi(av[5]);
 	else
 		philos->eatsnb = -1;
-	i = 0;
-	philos->philo = create_philos(ac, av, philos);
+	philos->philo = create_philos(av, philos);
 	if (!philos->philo)
 		return (NULL);
 	return (philos);
 }
 
+void	free_philos(t_philosophers *philos)
+{
+	t_philo *philo;
+	t_philo *tmp;
+	
+	philo = philos->philo;
+	while(philo)
+	{
+		tmp = philo;
+		philo = philo->next;
+		free(tmp);
+	}
+	free(philos);
+}
+
 int	main(int ac, char **av)
 {
 	t_philosophers *philos;
+	t_philo *philo;
 	
 	if (ac != 5 && ac != 6)
 		return (usage());
-	if (!check_args(ac, av))
+	if (!check_args(av))
 		return (0);
 	philos = set_data(ac, av);
 	if (!philos)
 		return (0);
 	ft_printf("Philos are setted up\n");
-	ft_printf("Philosophers have %d before dead\nPhilosophers eats while %dsec\nPhilosophers sleep for %dsec\nPhilosophers should eat %d times\n", philos->time_die, philos->time_eat, philos->time_sleep, philos->eatsnb);
-	while (philos->philo)
+	ft_printf("Philosophers dead time is\t: %d sec\nPhilosophers eat time is\t: %d sec\nPhilosophers sleep time \t: %d sec\nPhilosophers eat numbers is\t: %d sec\n", philos->time_die, philos->time_eat, philos->time_sleep, philos->eatsnb);
+	philo = philos->philo;
+	while (philo)
 	{
-		ft_printf("Philosopher %d is set up and dies in %d seconds\n", philos->philo->id, philos->philo->time_die);
-		philos->philo = philos->philo->next;
+		ft_printf("Philosopher %d is set up and dies in %d seconds and should eat %d times\n", philo->id, philo->time_die, philo->eatsnb);
+		philo = philo->next;
 	}
+	free_philos(philos);
 	return (0);
 }
