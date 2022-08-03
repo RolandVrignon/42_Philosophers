@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/03 12:21:34 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:29:59 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int	main(int ac, char **av)
 	if (!philos)
 		return (0);
 	ft_printf("Philos are setted up\n");
-	ft_printf("Philosophers dead time is\t: %d sec\nPhilosophers eat time is\t: %d sec\nPhilosophers sleep time \t: %d sec\nPhilosophers eat numbers is\t: %d sec\n", philos->time_die, philos->time_eat, philos->time_sleep, philos->eatsnb);
+	ft_printf("We have \t\t\t: %d philosophers\nThey die after\t\t\t: %d sec\nThey eat while\t\t\t: %d sec\nThey sleep while\t\t: %d sec\nthey have to eat\t\t: %d times\n", philos->nb, philos->time_die, philos->time_eat, philos->time_sleep, philos->eatsnb);
 	philo = philos->philo;
 	i = 0;
-	while (i <= philos->nb)
+	while (i < philos->nb)
 	{
 		ft_printf("Philosopher %d is set up and dies in %d seconds and should eat %d times\n", philo->id, philo->time_die, philo->eatsnb);
 		philo = philo->next;
