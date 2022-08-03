@@ -6,43 +6,20 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:58:29 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/03 13:46:57 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:57:44 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	check_args(char **av)
+t_philo	*philo_lstaddback(t_philo *phil, t_philosophers *philos, int i)
 {
-	int i;
-	int j;
+	t_philo	*tmp;
+	t_philo	*first;
 
-	i = 1;
-	while (av[i])
-	{
-		j = 0;
-		while(av[i][j])
-		{
-			if (!ft_isdigit(av[i][j]))
-			{
-				ft_printf("One of args is not an int\n");
-				return (0);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-t_philo *philo_lstaddback(t_philo *philo, t_philosophers *philos, int i)
-{
-	t_philo *tmp;
-	t_philo *first;
-
-	first = philo;
-	while (philo->next != NULL)
-		philo = philo->next;
+	first = phil;
+	while (phil->next != NULL)
+		phil = phil->next;
 	tmp = (t_philo *)malloc(sizeof(t_philo));
 	if (!tmp)
 		return (NULL);
@@ -51,16 +28,16 @@ t_philo *philo_lstaddback(t_philo *philo, t_philosophers *philos, int i)
 	tmp->time_eat = philos->time_eat;
 	tmp->time_sleep = philos->time_sleep;
 	tmp->eatsnb = philos->eatsnb;
-	tmp->prev = philo;
+	tmp->prev = phil;
 	tmp->next = NULL;
-	philo->next = tmp;
+	phil->next = tmp;
 	return (first);
 }
 
-t_philo *philo_addlast(t_philo *philo, t_philosophers *philos, int i)
+t_philo	*philo_addlast(t_philo *philo, t_philosophers *philos, int i)
 {
-	t_philo *tmp;
-	t_philo *first;
+	t_philo	*tmp;
+	t_philo	*first;
 
 	first = philo;
 	while (philo->next != NULL)
@@ -80,9 +57,9 @@ t_philo *philo_addlast(t_philo *philo, t_philosophers *philos, int i)
 	return (first);
 }
 
-t_philo *create_philos(char **av, t_philosophers *philos)
+t_philo	*create_philos(char **av, t_philosophers *philos)
 {
-	t_philo *philo;
+	t_philo	*philo;
 	int		i;
 
 	philo = (t_philo *)malloc(sizeof(t_philo));
@@ -107,9 +84,9 @@ t_philo *create_philos(char **av, t_philosophers *philos)
 	return (philo);
 }
 
-t_philosophers *set_data(int ac, char **av)
+t_philosophers	*set_data(int ac, char **av)
 {
-	t_philosophers *philos;
+	t_philosophers	*philos;
 
 	philos = (t_philosophers *)malloc(sizeof(t_philosophers));
 	if (!philos)
@@ -130,13 +107,13 @@ t_philosophers *set_data(int ac, char **av)
 
 void	free_philos(t_philosophers *philos)
 {
-	t_philo *philo;
-	t_philo *tmp;
+	t_philo	*philo;
+	t_philo	*tmp;
 	int		i;
-	
+
 	philo = philos->philo;
 	i = 0;
-	while(i < philos->nb)
+	while (i < philos->nb)
 	{
 		tmp = philo;
 		philo = philo->next;

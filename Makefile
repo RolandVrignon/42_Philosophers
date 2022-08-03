@@ -6,12 +6,13 @@
 #    By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/02 17:40:10 by rvrignon          #+#    #+#              #
-#    Updated: 2022/08/03 13:46:33 by rvrignon         ###   ########.fr        #
+#    Updated: 2022/08/03 13:52:13 by rvrignon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC =  	ft_philo/main.c \
-		ft_philo/src/utils.c
+		ft_philo/src/utils.c \
+		ft_philo/src/utils_two.c
 		
 OBJ		=	$(SRC:.c=.o)
 CC		=	gcc
