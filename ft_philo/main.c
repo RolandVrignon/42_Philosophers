@@ -6,11 +6,11 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/03 12:29:59 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/03 13:50:07 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "includes/philo.h"
 
 // ac = 1 => number_of_philosophers
 // ac = 2 => time_to_die
@@ -25,20 +25,12 @@ int	usage(void)
 	return (0);
 }
 
-
-int	main(int ac, char **av)
+static void	print_data(t_philosophers *philos)
 {
-	t_philosophers	*philos;
 	t_philo			*philo;
 	int				i;
 	
-	if (ac != 5 && ac != 6)
-		return (usage());
-	if (!check_args(av))
-		return (0);
-	philos = set_data(ac, av);
-	if (!philos)
-		return (0);
+	ft_printf("\n-----------------------------------------------------\n\n");
 	ft_printf("Philos are setted up\n");
 	ft_printf("We have \t\t\t: %d philosophers\nThey die after\t\t\t: %d sec\nThey eat while\t\t\t: %d sec\nThey sleep while\t\t: %d sec\nthey have to eat\t\t: %d times\n", philos->nb, philos->time_die, philos->time_eat, philos->time_sleep, philos->eatsnb);
 	philo = philos->philo;
@@ -49,6 +41,22 @@ int	main(int ac, char **av)
 		philo = philo->next;
 		i++;
 	}
+	ft_printf("\n-----------------------------------------------------\n\n");
+}
+
+
+int	main(int ac, char **av)
+{
+	t_philosophers	*philos;
+	
+	if (ac != 5 && ac != 6)
+		return (usage());
+	if (!check_args(av))
+		return (0);
+	philos = set_data(ac, av);
+	if (!philos)
+		return (0);
+	print_data(philos);
 	free_philos(philos);
 	return (0);
 }
