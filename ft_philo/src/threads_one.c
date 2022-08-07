@@ -6,18 +6,30 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/07 19:03:19 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/07 19:10:40 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static char get_Timestamp()
+char get_Timestamp()
 {
     struct timeval current_time;
     gettimeofday(&current_time, NULL);
     printf("%ld.%ld ", current_time.tv_sec, current_time.tv_usec);
     return ('-'); 
+}
+
+int try_locker(t_philo *philo)
+{
+    if (pthread_mutex_trylock(&philo->next->forkMutex) == 0)
+    {
+        if (pthread_mutex_trylock(&philo->forkMutex) == 0)
+            return 1;
+        else
+            pthread_mutex_unlock(&philo->next->forkMutex);
+    }
+    return 0;
 }
 
 void* routine(void* args)
@@ -27,8 +39,7 @@ void* routine(void* args)
 	philo = (t_philo *) args;
 	while (philo->eatsnb != 0)
 	{
-		if (pthread_mutex_trylock(&philo->next->forkMutex) == 0 &&
-			pthread_mutex_trylock(&philo->forkMutex) == 0)
+		if (try_locker(philo))
 		{
 			printf("%c Philo %d has taken a fork\n", get_Timestamp(), philo->id);
 			printf("%c Philo %d is eating\n",get_Timestamp(), philo->id);
