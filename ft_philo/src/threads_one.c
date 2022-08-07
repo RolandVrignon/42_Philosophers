@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/07 20:47:47 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:00:36 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void* routine(void* args)
 		{
 			printf("%c Philo %d\thas taken a fork\n", get_Timestamp(), philo->id);
 			printf("%c Philo %d\tis eating\n",get_Timestamp(), philo->id);
-			sleep(philo->time_eat);
+			usleep(philo->time_eat);
 			fork_unlocker(philo);
 			philo->eatsnb -= 1;
             if (no_death(philo))
                 printf("%c Philo %d\tis sleeping\n",get_Timestamp(), philo->id);
-            sleep(philo->time_sleep);
+            usleep(philo->time_sleep);
 		}
 		else
 		{

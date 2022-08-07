@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:58:29 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/07 20:49:20 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:04:01 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ t_philo	*philo_lstaddback(t_philo *phil, t_philosophers *philos, int i)
 	if (!tmp)
 		return (NULL);
 	tmp->id = i + 1;
-	tmp->time_die = philos->time_die * 100000;
-	tmp->time_eat = philos->time_eat;
-	tmp->time_sleep = philos->time_sleep;
+	tmp->time_die = (useconds_t)(philos->time_die * 100000);
+	tmp->time_eat = (useconds_t)(philos->time_eat * 100000);
+	tmp->time_sleep = (useconds_t)(philos->time_sleep * 100000);
 	tmp->eatsnb = philos->eatsnb;
 	tmp->prev = phil;
 	tmp->next = NULL;
@@ -46,9 +46,9 @@ t_philo	*philo_addlast(t_philo *philo, t_philosophers *philos, int i)
 	if (!tmp)
 		return (NULL);
 	tmp->id = i + 1;
-	tmp->time_die = philos->time_die * 100000;
-	tmp->time_eat = philos->time_eat;
-	tmp->time_sleep = philos->time_sleep;
+	tmp->time_die = (useconds_t)(philos->time_die * 100000);
+	tmp->time_eat = (useconds_t)(philos->time_eat * 100000);
+	tmp->time_sleep = (useconds_t)(philos->time_sleep * 100000);
 	tmp->eatsnb = philos->eatsnb;
 	tmp->prev = philo;
 	tmp->next = first;
@@ -66,9 +66,9 @@ t_philo	*create_philos(char **av, t_philosophers *philos)
 	if (!philo)
 		return (NULL);
 	philo->id = 1;
-	philo->time_die = philos->time_die * 100000;
-	philo->time_eat = philos->time_eat;
-	philo->time_sleep = philos->time_sleep;
+	philo->time_die = (useconds_t)(philos->time_die * 100000);
+	philo->time_eat = (useconds_t)(philos->time_eat * 100000);
+	philo->time_sleep = (useconds_t)(philos->time_sleep * 100000);
 	philo->eatsnb = philos->eatsnb;
 	philo->next = NULL;
 	philo->prev = NULL;
