@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/03 19:33:58 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/07 18:53:01 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,17 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <pthread.h>
-# include "../../libft/libft.h"
+# include <sys/time.h>
+
+typedef struct  s_timeval  {
+  	time_t				tv_sec ;
+	suseconds_t			tv_usec ;
+}	t_timeval;
 
 typedef struct s_philo
 {
 	pthread_t		th;
+	pthread_mutex_t forkMutex;
 	int				id;
 	int				time_die;
 	int				time_eat;
