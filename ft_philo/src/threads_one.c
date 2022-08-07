@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/07 19:37:30 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/07 20:47:47 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ int no_death(t_philo *philo)
     int id;
 
     id = philo->id;
+    if (philo->time_die <= 0)
+        return (0);
     philo = philo->next;
     while(philo->id != id)
     {
-        if (philo->time_die == 0)
+        if (philo->time_die <= 0)
             return (0);
         philo = philo->next;
     }
@@ -67,12 +69,16 @@ void* routine(void* args)
 			sleep(philo->time_eat);
 			fork_unlocker(philo);
 			philo->eatsnb -= 1;
-            printf("%c Philo %d\tis sleeping\n",get_Timestamp(), philo->id);
+            if (no_death(philo))
+                printf("%c Philo %d\tis sleeping\n",get_Timestamp(), philo->id);
             sleep(philo->time_sleep);
 		}
 		else
 		{
-            
+            philo->time_die -= 1;
+            usleep(1);
+            if (philo->time_die <= 0)
+                printf("%c Philo %d\tdied\n",get_Timestamp(), philo->id);
 		}
 	}
 	return (NULL);

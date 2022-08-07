@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/07 19:42:12 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/07 20:51:41 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	print_data(t_philosophers *philos)
 	i = 0;
 	while (i < philos->nb)
 	{
-		printf("Philosopher %d is set up and dies in %d seconds and should eat %d times\n",philo->id, philo->time_die, philo->eatsnb);
+		printf("Philosopher %d is set up and dies in %d ms and should eat %d times\n",philo->id, philo->time_die, philo->eatsnb);
 		philo = philo->next;
 		i++;
 	}
@@ -58,6 +58,7 @@ int	main(int ac, char **av)
 	print_data(philos);
 	if (philos->nb != 0 && philos->eatsnb != 0)
 		thread_process(philos);
+	printf("%c Finish execution\n",get_Timestamp());
 	print_data(philos);
 	free_philos(philos);	
 	return (0);
