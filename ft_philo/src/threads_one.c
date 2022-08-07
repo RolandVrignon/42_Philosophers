@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/07 19:10:40 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/07 19:37:30 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char get_Timestamp()
     return ('-'); 
 }
 
-int try_locker(t_philo *philo)
+int try_fork_locker(t_philo *philo)
 {
     if (pthread_mutex_trylock(&philo->next->forkMutex) == 0)
     {
@@ -32,22 +32,42 @@ int try_locker(t_philo *philo)
     return 0;
 }
 
+void fork_unlocker(t_philo *philo)
+{
+    pthread_mutex_unlock(&philo->next->forkMutex);
+	pthread_mutex_unlock(&philo->forkMutex);
+}
+
+int no_death(t_philo *philo)
+{
+    int id;
+
+    id = philo->id;
+    philo = philo->next;
+    while(philo->id != id)
+    {
+        if (philo->time_die == 0)
+            return (0);
+        philo = philo->next;
+    }
+    return (1);
+}
+
 void* routine(void* args)
 {
 	t_philo *philo;
 
 	philo = (t_philo *) args;
-	while (philo->eatsnb != 0)
+	while (philo->eatsnb != 0 && no_death(philo))
 	{
-		if (try_locker(philo))
+		if (try_fork_locker(philo))
 		{
-			printf("%c Philo %d has taken a fork\n", get_Timestamp(), philo->id);
-			printf("%c Philo %d is eating\n",get_Timestamp(), philo->id);
+			printf("%c Philo %d\thas taken a fork\n", get_Timestamp(), philo->id);
+			printf("%c Philo %d\tis eating\n",get_Timestamp(), philo->id);
 			sleep(philo->time_eat);
-			pthread_mutex_unlock(&philo->next->forkMutex);
-			pthread_mutex_unlock(&philo->forkMutex);
+			fork_unlocker(philo);
 			philo->eatsnb -= 1;
-            printf("%c Philo %d is sleeping\n",get_Timestamp(), philo->id);
+            printf("%c Philo %d\tis sleeping\n",get_Timestamp(), philo->id);
             sleep(philo->time_sleep);
 		}
 		else
