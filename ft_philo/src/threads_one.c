@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/07 21:00:36 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:20:49 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ void* routine(void* args)
 			fork_unlocker(philo);
 			philo->eatsnb -= 1;
             if (no_death(philo))
+            {
                 printf("%c Philo %d\tis sleeping\n",get_Timestamp(), philo->id);
-            usleep(philo->time_sleep);
+                usleep(philo->time_sleep);
+            }
 		}
 		else
 		{
