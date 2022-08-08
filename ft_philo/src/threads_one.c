@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 16:22:07 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:43:28 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void* routine(void *args)
 	philo = (t_philo *) args;
 	if (pthread_mutex_lock(&philos->printfMutex) ==  0)
 	{
-		printf("Hello, i'm philosopher #%d\n", philo->id);
+		printf("Hello from philo : %d\n", philo->id);
 		pthread_mutex_unlock(&philos->printfMutex);
 	}
 	return (NULL);

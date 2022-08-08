@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:58:29 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 12:10:25 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:35:36 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_philosophers	*set_data(int ac, char **av)
 {
 	t_philosophers	*philos;
 
-	philos = (t_philosophers *)malloc(sizeof(t_philosophers));
+	philos = get_struct();
 	if (!philos)
 		return (NULL);
 	philos->nb = ft_atoi(av[1]);
@@ -123,5 +123,4 @@ void	free_philos(t_philosophers *philos)
 		free(tmp);
 		i++;
 	}
-	free(philos);
 }

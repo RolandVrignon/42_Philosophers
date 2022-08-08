@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 15:50:09 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 16:31:56 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	usage(void)
 	return (0);
 }
 
-static void	print_data(t_philosophers *philos)
+void	print_data(t_philosophers *philos)
 {
 	t_philo			*philo;
 	int				i;
