@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:58:29 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 21:29:18 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 23:01:04 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ t_philo	*philo_lstaddback(t_philo *phil, t_philosophers *philos, int i)
 	tmp->gotfork_ms = 0;
 	tmp->gotsleep_ms = 0;
 	tmp->is_eating = 0;
+	tmp->is_sleeping = 0;
+	tmp->is_thinking = 1;
+	tmp->start_thinking_ms = 0;
 	tmp->eatsnb = philos->eatsnb;
 	tmp->prev = phil;
 	tmp->next = NULL;
@@ -51,6 +54,9 @@ t_philo	*philo_addlast(t_philo *philo, t_philosophers *philos, int i)
 	tmp->gotfork_ms = 0;
 	tmp->gotsleep_ms = 0;
 	tmp->is_eating = 0;
+	tmp->is_sleeping = 0;
+	tmp->is_thinking = 1;
+	tmp->start_thinking_ms = 0;
 	tmp->eatsnb = philos->eatsnb;
 	tmp->prev = philo;
 	tmp->next = first;
@@ -72,6 +78,9 @@ t_philo	*create_philos(char **av, t_philosophers *philos)
 	philo->gotfork_ms = 0;
 	philo->gotsleep_ms = 0;
 	philo->is_eating = 0;
+	philo->is_sleeping = 0;
+	philo->start_thinking_ms = 0;
+	philo->is_thinking = 1;
 	philo->eatsnb = philos->eatsnb;
 	philo->next = NULL;
 	philo->prev = NULL;

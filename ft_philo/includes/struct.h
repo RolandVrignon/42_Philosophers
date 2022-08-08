@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 21:25:58 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:32:03 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ typedef struct s_philo
 	__useconds_t			gotfork_ms;
 	int						is_eating;
 	__useconds_t			gotsleep_ms;
+	int						is_sleeping;
+	__useconds_t			start_thinking_ms;
+	int						is_thinking;
 	int						eatsnb;
 	struct s_philo			*next;
 	struct s_philo			*prev;
