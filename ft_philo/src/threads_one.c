@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 16:43:28 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 18:46:22 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,36 @@ void* routine(void *args)
 
 	philos = get_struct();
 	philo = (t_philo *) args;
-	if (pthread_mutex_lock(&philos->printfMutex) ==  0)
+	
+	while(philo->eatsnb > 0)
 	{
-		printf("Hello from philo : %d\n", philo->id);
-		pthread_mutex_unlock(&philos->printfMutex);
+		if (pthread_mutex_lock(&philo->forkMutex) ==  0)
+		{
+			if (pthread_mutex_lock(&philo->next->forkMutex) == 0)
+			{
+				philo->time_sleep = philos->time_sleep;
+				if (pthread_mutex_lock(&philos->printfMutex) == 0)
+				{
+					printf("%ld %d has taken a fork\n",get_Timestamp(philos), philo->id);
+					pthread_mutex_unlock(&philos->printfMutex);
+				}
+				if (pthread_mutex_lock(&philos->printfMutex) == 0)
+				{
+					printf("%ld %d is eating\n",get_Timestamp(philos), philo->id);
+					pthread_mutex_unlock(&philos->printfMutex);
+				}
+				usleep(philo->time_eat);
+				pthread_mutex_unlock(&philo->forkMutex);
+				pthread_mutex_unlock(&philo->next->forkMutex);
+				philo->eatsnb -= 1;
+				if (pthread_mutex_lock(&philos->printfMutex) == 0)
+				{
+					printf("%ld %d is sleeping\n",get_Timestamp(philos), philo->id);
+					pthread_mutex_unlock(&philos->printfMutex);
+				}
+				usleep(philo->time_sleep);
+			}
+		}
 	}
 	return (NULL);
 }

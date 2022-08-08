@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:57:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 16:32:11 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 18:46:03 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ void				printf_Mutex(t_philosophers *philos, pthread_mutex_t printfMutex);
 t_philosophers		*get_struct(void);
 
 void				print_data(t_philosophers *philos);
+
+time_t				now(void);
+
+time_t 				get_Timestamp(t_philosophers *philos);
 
 #endif
 

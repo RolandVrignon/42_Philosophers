@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:55:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 16:30:57 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 18:46:27 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,22 @@ t_philosophers *get_struct(void)
     static t_philosophers philos;
 
     return (&philos);
+}
+
+time_t get_Timestamp(t_philosophers *philos)
+{
+	time_t			mili;
+	
+    mili = now() - philos->today;
+    return (mili); 
+}
+
+time_t now(void)
+{
+	struct timeval	current_time;
+	time_t			mili;
+
+	gettimeofday(&current_time, NULL);
+	mili = current_time.tv_sec * 1000LL + current_time.tv_usec / 1000;
+	return (mili);
 }
