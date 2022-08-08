@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/07 21:28:24 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:50:09 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	main(int ac, char **av)
 	print_data(philos);
 	if (philos->nb != 0 && philos->eatsnb != 0)
 		thread_process(philos);
-	printf("%c Finish execution\n",get_Timestamp());
 	print_data(philos);
 	free_philos(philos);	
 	return (0);

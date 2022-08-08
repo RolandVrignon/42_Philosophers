@@ -6,7 +6,7 @@
 #    By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/02 17:40:10 by rvrignon          #+#    #+#              #
-#    Updated: 2022/08/07 18:17:36 by rvrignon         ###   ########.fr        #
+#    Updated: 2022/08/08 11:55:49 by rvrignon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ SRC =  	ft_philo/main.c \
 		ft_philo/src/utils.c \
 		ft_philo/src/utils_two.c \
 		ft_philo/src/threads_one.c \
+		ft_philo/src/threads_two.c \
 		
 OBJ		=	$(SRC:.c=.o)
 CC		=	gcc
