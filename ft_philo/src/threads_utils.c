@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 23:10:00 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 23:22:29 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 23:48:51 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,18 @@ int he_died(t_philosophers *philos, t_philo *philo)
 	if (!philo->start_thinking_ms)
 	{
 		if (!philo->is_eating && !philo->is_sleeping && get_Timestamp(philos) > philos->time_die_s * 1000)
-			return 1;
+		{
+			philo->is_dead = 1;
+			return (1);
+		}
 	}
 	else
 	{
 		if (!philo->is_eating && !philo->is_sleeping && get_Timestamp(philos) - philo->start_thinking_ms > philos->time_die_s * 1000)
+		{
+			philo->is_dead = 1;
 			return (1);
+		}
 	}
 	return (0);
 }
@@ -70,7 +76,11 @@ int has_fork(t_philosophers *philos, t_philo *philo)
 {
 	(void)philos;
 	if (!philo->is_dead && !philo->is_sleeping && philo->gotfork_ms && !philo->is_eating)
+	{
+		philo->is_thinking = 0;
+		philo->is_eating = 1;
 		return (1);
+	}
 	return (0);
 }
 
@@ -79,14 +89,23 @@ int has_fork(t_philosophers *philos, t_philo *philo)
 int he_finished_eating(t_philosophers *philos, t_philo *philo)
 {
 	if (get_Timestamp(philos) - philo->gotfork_ms > philos->time_eat_s * 1000)
-		return 1;
+	{
+		philo->eatsnb -= 1;
+		philo->gotfork_ms = 0;
+		philo->is_eating = 0;
+		return (1);
+	}
 	return (0);
 }
 
 int is_sleeping(t_philosophers *philos, t_philo *philo)
 {
 	if (!philo->is_dead && philo->is_eating && he_finished_eating(philos, philo))
+	{
+		philo->gotsleep_ms = get_Timestamp(philos);
+		philo->is_sleeping = 1;
 		return (1);
+	}
 	return (0);
 }
 
@@ -95,13 +114,20 @@ int is_sleeping(t_philosophers *philos, t_philo *philo)
 int he_finished_sleeping(t_philosophers *philos, t_philo *philo)
 {
 	if (get_Timestamp(philos) - philo->gotsleep_ms > philos->time_sleep_s * 1000)
-		return 1;
+	{
+		philo->is_sleeping = 0;
+		return (1);
+	}
 	return (0);
 }
 
 int is_thinking(t_philosophers *philos, t_philo *philo)
 {
 	if (!philo->is_dead && philo->is_sleeping && he_finished_sleeping(philos, philo))
+	{
+		philo->start_thinking_ms = get_Timestamp(philos);
+		philo->is_thinking = 1;
 		return (1);
+	}
 	return (0);
 }

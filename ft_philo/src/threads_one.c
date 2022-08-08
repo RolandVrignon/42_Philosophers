@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 23:33:22 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 23:42:33 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,16 @@ void *log_philo(void *args)
 	while(!someone_died(philos) && !everybody_ate(philos))
 	{
 		if (he_died(philos, philo))
-		{
 			printf("%ld %d died\n", get_Timestamp(philos), philo->id);
-			philo->is_dead = 1;
-		}
 		else if (has_fork(philos, philo))
 		{
-			philo->is_thinking = 0;
 			printf("%ld %d has taken a fork\n", get_Timestamp(philos), philo->id);
-			philo->is_eating = 1;
 			printf("%ld %d is eating\n", get_Timestamp(philos), philo->id);
 		}
 		else if (is_sleeping(philos, philo))
-		{
 			printf("%ld %d is sleeping\n", get_Timestamp(philos), philo->id);
-			philo->eatsnb -= 1;
-			philo->gotsleep_ms = philo->gotfork_ms + philos->time_eat_s * 1000;
-			philo->gotfork_ms = 0;
-			philo->is_eating = 0;
-			philo->is_sleeping = 1;
-		}
 		else if (is_thinking(philos, philo))
-		{
 			printf("%ld %d is thinking\n", get_Timestamp(philos), philo->id);
-			philo->start_thinking_ms = get_Timestamp(philos);
-			philo->is_thinking = 1;
-			philo->is_sleeping = 0;
-		}
 		philo = philo->next;
 	}
 	return (NULL);
