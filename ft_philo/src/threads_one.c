@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 23:24:00 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 23:33:22 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void* routine(void *args)
 	philos = get_struct();
 	philo = (t_philo *) args;
 	if (philo->id % 2 != 0 && philo->eatsnb == philos->eatsnb)
-		usleep(10000);	
+	{
+		printf("%ld %d is thinking\n", get_Timestamp(philos), philo->id);
+		usleep(100000);
+	}	
 	while(!someone_died(philos) && philo->eatsnb > 0)
 	{
 		if (pthread_mutex_lock(&philo->forkMutex) ==  0)
