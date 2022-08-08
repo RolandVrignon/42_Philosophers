@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 16:31:56 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:28:58 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	print_data(t_philosophers *philos)
 
 	printf("\n-----------------------------------------------------\n\n");
 	printf("Philos are setted up\n");
-	printf("We have \t\t\t: %d philosophers\nThey die after\t\t\t: %d sec\nThey eat while\t\t\t: %d sec\nThey sleep while\t\t: %d sec\nthey have to eat\t\t: %d times\n", philos->nb, philos->time_die, philos->time_eat, philos->time_sleep, philos->eatsnb);
+	printf("We have \t\t\t: %d philosophers\nThey die after\t\t\t: %d sec\nThey eat while\t\t\t: %d sec\nThey sleep while\t\t: %d sec\nthey have to eat\t\t: %d times\n", philos->nb, philos->time_die_s, philos->time_eat_s, philos->time_sleep_s, philos->eatsnb);
 	philo = philos->philo;
 	i = 0;
 	while (i < philos->nb)
 	{
-		printf("Philosopher %d is set up and dies in\t%d\tms, eat while\t%d\tms, and should eat %d times\n",philo->id, philo->time_die, philo->time_eat, philo->eatsnb);
+		printf("Philosopher %d is set up, they should eat %d times\n",philo->id, philo->eatsnb);
 		philo = philo->next;
 		i++;
 	}

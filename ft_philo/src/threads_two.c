@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:55:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 18:46:27 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:09:23 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ time_t now(void)
 	time_t			mili;
 
 	gettimeofday(&current_time, NULL);
-	mili = current_time.tv_sec * 1000LL + current_time.tv_usec / 1000;
+	mili = current_time.tv_sec * (time_t)1000 + current_time.tv_usec / (time_t)1000;
 	return (mili);
 }

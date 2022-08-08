@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:58:29 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 18:46:05 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:29:18 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ t_philo	*philo_lstaddback(t_philo *phil, t_philosophers *philos, int i)
 	if (!tmp)
 		return (NULL);
 	tmp->id = i + 1;
-	tmp->time_die = (__useconds_t)(philos->time_die * 100000);
-	tmp->time_eat = (__useconds_t)(philos->time_eat * 100000);
-	tmp->time_sleep = (__useconds_t)(philos->time_sleep * 100000);
-	tmp->gotfork = 0;
+	tmp->is_dead = 0;
+	tmp->gotfork_ms = 0;
+	tmp->gotsleep_ms = 0;
+	tmp->is_eating = 0;
 	tmp->eatsnb = philos->eatsnb;
 	tmp->prev = phil;
 	tmp->next = NULL;
@@ -47,10 +47,10 @@ t_philo	*philo_addlast(t_philo *philo, t_philosophers *philos, int i)
 	if (!tmp)
 		return (NULL);
 	tmp->id = i + 1;
-	tmp->time_die = (__useconds_t)(philos->time_die * 100000);
-	tmp->time_eat = (__useconds_t)(philos->time_eat * 100000);
-	tmp->time_sleep = (__useconds_t)(philos->time_sleep * 100000);
-	tmp->gotfork = 0;
+	tmp->is_dead = 0;
+	tmp->gotfork_ms = 0;
+	tmp->gotsleep_ms = 0;
+	tmp->is_eating = 0;
 	tmp->eatsnb = philos->eatsnb;
 	tmp->prev = philo;
 	tmp->next = first;
@@ -68,10 +68,10 @@ t_philo	*create_philos(char **av, t_philosophers *philos)
 	if (!philo)
 		return (NULL);
 	philo->id = 1;
-	philo->time_die = (__useconds_t)(philos->time_die * 100000);
-	philo->time_eat = (__useconds_t)(philos->time_eat * 100000);
-	philo->time_sleep = (__useconds_t)(philos->time_sleep * 100000);
-	philo->gotfork = 0;
+	philo->is_dead = 0;
+	philo->gotfork_ms = 0;
+	philo->gotsleep_ms = 0;
+	philo->is_eating = 0;
 	philo->eatsnb = philos->eatsnb;
 	philo->next = NULL;
 	philo->prev = NULL;
@@ -95,9 +95,9 @@ t_philosophers	*set_data(int ac, char **av)
 	if (!philos)
 		return (NULL);
 	philos->nb = ft_atoi(av[1]);
-	philos->time_die = ft_atoi(av[2]);
-	philos->time_eat = ft_atoi(av[3]);
-	philos->time_sleep = ft_atoi(av[4]);
+	philos->time_die_s = ft_atoi(av[2]);
+	philos->time_eat_s = ft_atoi(av[3]);
+	philos->time_sleep_s = ft_atoi(av[4]);
 	philos->today = now();
 	if (ac == 6)
 		philos->eatsnb = ft_atoi(av[5]);
