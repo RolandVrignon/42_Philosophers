@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 13:00:11 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:19:09 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
-
-// typedef struct  s_timeval  {
-//   	time_t				tv_sec ;
-// 	suseconds_t			tv_usec ;
-// }	t_timeval;
 
 typedef struct s_philo
 {

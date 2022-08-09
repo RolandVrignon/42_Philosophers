@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:58:29 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 13:13:27 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:16:17 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ t_philo	*create_philos(char **av, t_philosophers *philos, int i)
 t_philosophers	*set_data(int ac, char **av)
 {
 	t_philosophers	*philos;
-	int				i;
 
 	philos = get_struct();
 	if (!philos)
@@ -111,7 +110,6 @@ t_philosophers	*set_data(int ac, char **av)
 		philos->eatsnb = ft_atoi(av[5]);
 	else
 		philos->eatsnb = -1;
-	i = 1;
 	philos->philo = create_philos(av, philos, 1);
 	if (!philos->philo)
 		return (NULL);
