@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:03:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 13:06:21 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:51:46 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void	wait_philo(t_philo *philo, t_philosophers *philos)
 {
 	if (philo->id % 2 != 0 && philo->eatsnb == philos->eatsnb)
 	{
-		printf("%ld %d is thinking\n", get_tmstmp(philos), philo->id);
+		if (pthread_mutex_lock(&philos->printf_mutex) == 0)
+			printf("%ld %d is thinking\n", get_tmstmp(philos), philo->id);
+		pthread_mutex_unlock(&philos->printf_mutex);
 		usleep(10000);
 	}
 }

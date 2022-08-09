@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 13:10:10 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:54:18 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,28 @@ void	*routine(void *args)
 void	*log_philo(void *args)
 {
 	t_philosophers	*philos;
-	t_philo			*philo;
+	t_philo			*ph;
 
 	philos = (t_philosophers *)args;
-	philo = philos->philo;
+	ph = philos->philo;
 	while (!someone_died(philos) && !everybody_ate(philos))
 	{
-		if (he_died(philos, philo))
-			printf("%ld %d died\n", get_tmstmp(philos), philo->id);
-		else if (has_fork(philos, philo))
+		if (pthread_mutex_lock(&philos->printf_mutex) == 0)
 		{
-			printf("%ld %d has taken a fork\n", get_tmstmp(philos), philo->id);
-			printf("%ld %d is eating\n", get_tmstmp(philos), philo->id);
+			if (he_died(philos, ph))
+				printf("%ld %d died\n", get_tmstmp(philos), ph->id);
+			else if (has_fork(philos, ph))
+			{
+				printf("%ld %d has taken a fork\n", get_tmstmp(philos), ph->id);
+				printf("%ld %d is eating\n", get_tmstmp(philos), ph->id);
+			}
+			else if (is_sleeping(philos, ph))
+				printf("%ld %d is sleeping\n", get_tmstmp(philos), ph->id);
+			else if (is_thinking(philos, ph))
+				printf("%ld %d is thinking\n", get_tmstmp(philos), ph->id);
+			pthread_mutex_unlock(&philos->printf_mutex);
 		}
-		else if (is_sleeping(philos, philo))
-			printf("%ld %d is sleeping\n", get_tmstmp(philos), philo->id);
-		else if (is_thinking(philos, philo))
-			printf("%ld %d is thinking\n", get_tmstmp(philos), philo->id);
-		philo = philo->next;
+		ph = ph->next;
 	}
 	return (NULL);
 }

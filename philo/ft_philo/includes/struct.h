@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 13:19:09 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 14:22:43 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_philo
 {
 	pthread_t				th;
 	pthread_mutex_t			fork_mutex;
+	pthread_mutex_t			philo_mutex;
 	int						id;
 	int						is_dead;
 	__useconds_t			gotfork_ms;
