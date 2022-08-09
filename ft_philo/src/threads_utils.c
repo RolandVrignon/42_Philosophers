@@ -6,18 +6,11 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 23:10:00 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 12:49:40 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:55:35 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-int check_health(t_philosophers *philos)
-{
-	if ((now() - philos->today * 1000) > philos->time_die_ms)
-		return (0);
-	return (1);
-}
 
 int someone_died(t_philosophers *philos)
 {

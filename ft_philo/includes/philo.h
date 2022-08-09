@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:57:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 12:50:15 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:55:39 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,63 +15,67 @@
 
 # include "struct.h"
 
-int		usage(void);
+// ---------- UTILS
 
-void	print_data(t_philosophers *philos);
+int				usage(void);
 
-void* routine(void *args);
+void			print_data(t_philosophers *philos);
 
-void *log_philo(void *args);
+void* 			routine(void *args);
 
-void thread_process(t_philosophers *philos);
+void 			*log_philo(void *args);
 
-void philo_process(t_philosophers *philos);
+t_philosophers	*get_struct(void);
 
-t_philosophers *get_struct(void);
+t_philosophers	*get_struct(void);
 
-time_t get_Timestamp(t_philosophers *philos);
+t_philo			*philo_lstaddback(t_philo *phil, t_philosophers *philos, int i);
 
-time_t now(void);
+t_philo			*philo_addlast(t_philo *philo, t_philosophers *philos, int i);
 
-int check_health(t_philosophers *philos);
+t_philo			*create_philos(char **av, t_philosophers *philos);
 
-int someone_died(t_philosophers *philos);
+t_philosophers	*set_data(int ac, char **av);
 
-int everybody_ate(t_philosophers *philos);
+void			free_philos(t_philosophers *philos);
 
-int he_died(t_philosophers *philos, t_philo *philo);
+int				check_args(char **av);
 
-int he_finished_eating(t_philosophers *philos, t_philo *philo);
+int				ft_isdigit(int c);
 
-int he_finished_sleeping(t_philosophers *philos, t_philo *philo);
+time_t 			get_Timestamp(t_philosophers *philos);
 
-int is_thinking(t_philosophers *philos, t_philo *philo);
+long int		ft_atoi(const char *nptr);
 
-int has_fork(t_philosophers *philos, t_philo *philo);
+// ---------- Threads Process
 
-int is_sleeping(t_philosophers *philos, t_philo *philo);
+void 			thread_process(t_philosophers *philos);
 
-t_philo	*philo_lstaddback(t_philo *phil, t_philosophers *philos, int i);
+void 			philo_process(t_philosophers *philos);
 
-t_philo	*philo_addlast(t_philo *philo, t_philosophers *philos, int i);
+void			routine_whileeat(t_philosophers *philos, t_philo *philo);
 
-t_philo	*create_philos(char **av, t_philosophers *philos);
+void			routine_whiledeath(t_philosophers *philos, t_philo *philo);
 
-t_philosophers*set_data(int ac, char **av);
+// ------------ Threads Utils
 
-void	free_philos(t_philosophers *philos);
+int 			someone_died(t_philosophers *philos);
 
-int		check_args(char **av);
+int 			everybody_ate(t_philosophers *philos);
 
-int		ft_isdigit(int c);
+int 			he_died(t_philosophers *philos, t_philo *philo);
 
-long int	ft_atoi(const char *nptr);
+int 			he_finished_eating(t_philosophers *philos, t_philo *philo);
 
-void	wait_philo(t_philo *philo, t_philosophers *philos);
+int 			he_finished_sleeping(t_philosophers *philos, t_philo *philo);
 
-void	routine_whileeat(t_philosophers *philos, t_philo *philo);
+int 			is_thinking(t_philosophers *philos, t_philo *philo);
 
-void	routine_whiledeath(t_philosophers *philos, t_philo *philo);
+int 			has_fork(t_philosophers *philos, t_philo *philo);
+
+int 			is_sleeping(t_philosophers *philos, t_philo *philo);
+
+void			wait_philo(t_philo *philo, t_philosophers *philos);
 
 #endif
 
