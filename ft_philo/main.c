@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 22:19:59 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:29:10 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_data(t_philosophers *philos)
 
 	printf("\n-----------------------------------------------------\n\n");
 	printf("Philos are setted up\n");
-	printf("We have \t\t\t: %d philosophers\nThey die after\t\t\t: %d sec\nThey eat while\t\t\t: %d sec\nThey sleep while\t\t: %d sec\nthey have to eat\t\t: %d times\n", philos->nb, philos->time_die_s, philos->time_eat_s, philos->time_sleep_s, philos->eatsnb);
+	printf("We have \t\t\t: %d philosophers\nThey die after\t\t\t: %d ms\nThey eat while\t\t\t: %d ms\nThey sleep while\t\t: %d ms\nthey have to eat\t\t: %d times\n", philos->nb, philos->time_die_ms, philos->time_eat_ms, philos->time_sleep_ms, philos->eatsnb);
 	philo = philos->philo;
 	i = 0;
 	while (i < philos->nb)

@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 23:54:57 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:28:33 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void* routine(void *args)
 			if (pthread_mutex_lock(&philo->next->forkMutex) == 0)
 			{
 				philo->gotfork_ms = get_Timestamp(philos);
-				usleep(philos->time_eat_s * 1000000);
+				usleep(philos->time_eat_ms * 1000);
 				pthread_mutex_unlock(&philo->forkMutex);
 				pthread_mutex_unlock(&philo->next->forkMutex);
-				usleep(philos->time_sleep_s * 1000000);
+				usleep(philos->time_sleep_ms * 1000);
 			}
 		}
 	}

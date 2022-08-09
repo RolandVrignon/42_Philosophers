@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 23:10:00 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 23:48:51 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:31:21 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int check_health(t_philosophers *philos)
 {
-	if ((now() - philos->today * 1000000) > philos->time_die_s)
+	if ((now() - philos->today * 1000) > philos->time_die_ms)
 		return (0);
 	return (1);
 }
@@ -55,7 +55,7 @@ int he_died(t_philosophers *philos, t_philo *philo)
 {
 	if (!philo->start_thinking_ms)
 	{
-		if (!philo->is_eating && !philo->is_sleeping && get_Timestamp(philos) > philos->time_die_s * 1000)
+		if (!philo->is_eating && !philo->is_sleeping && get_Timestamp(philos) > philos->time_die_ms)
 		{
 			philo->is_dead = 1;
 			return (1);
@@ -63,7 +63,7 @@ int he_died(t_philosophers *philos, t_philo *philo)
 	}
 	else
 	{
-		if (!philo->is_eating && !philo->is_sleeping && get_Timestamp(philos) - philo->start_thinking_ms > philos->time_die_s * 1000)
+		if (!philo->is_eating && !philo->is_sleeping && get_Timestamp(philos) - philo->start_thinking_ms > philos->time_die_ms)
 		{
 			philo->is_dead = 1;
 			return (1);
@@ -88,7 +88,7 @@ int has_fork(t_philosophers *philos, t_philo *philo)
 
 int he_finished_eating(t_philosophers *philos, t_philo *philo)
 {
-	if (get_Timestamp(philos) - philo->gotfork_ms > philos->time_eat_s * 1000)
+	if (get_Timestamp(philos) - philo->gotfork_ms > philos->time_eat_ms)
 	{
 		philo->eatsnb -= 1;
 		philo->gotfork_ms = 0;
@@ -113,7 +113,7 @@ int is_sleeping(t_philosophers *philos, t_philo *philo)
 
 int he_finished_sleeping(t_philosophers *philos, t_philo *philo)
 {
-	if (get_Timestamp(philos) - philo->gotsleep_ms > philos->time_sleep_s * 1000)
+	if (get_Timestamp(philos) - philo->gotsleep_ms > philos->time_sleep_ms)
 	{
 		philo->is_sleeping = 0;
 		return (1);

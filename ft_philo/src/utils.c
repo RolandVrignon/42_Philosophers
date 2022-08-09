@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:58:29 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 23:01:04 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:30:07 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ t_philosophers	*set_data(int ac, char **av)
 	if (!philos)
 		return (NULL);
 	philos->nb = ft_atoi(av[1]);
-	philos->time_die_s = ft_atoi(av[2]);
-	philos->time_eat_s = ft_atoi(av[3]);
-	philos->time_sleep_s = ft_atoi(av[4]);
+	philos->time_die_ms = ft_atoi(av[2]);
+	philos->time_eat_ms = ft_atoi(av[3]);
+	philos->time_sleep_ms = ft_atoi(av[4]);
 	philos->today = now();
 	if (ac == 6)
 		philos->eatsnb = ft_atoi(av[5]);

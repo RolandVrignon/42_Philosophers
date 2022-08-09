@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 22:32:03 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:28:07 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ typedef struct s_philo
 typedef struct s_philosophers
 {
 	int				nb;
-	int				time_die_s;
-	int				time_eat_s;
-	int				time_sleep_s;
+	int				time_die_ms;
+	int				time_eat_ms;
+	int				time_sleep_ms;
 	int				eatsnb;
 	time_t			today;
 	pthread_mutex_t	printfMutex;
