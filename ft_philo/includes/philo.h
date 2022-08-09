@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:57:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 23:13:15 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:50:15 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ int		check_args(char **av);
 int		ft_isdigit(int c);
 
 long int	ft_atoi(const char *nptr);
+
+void	wait_philo(t_philo *philo, t_philosophers *philos);
+
+void	routine_whileeat(t_philosophers *philos, t_philo *philo);
+
+void	routine_whiledeath(t_philosophers *philos, t_philo *philo);
 
 #endif
 

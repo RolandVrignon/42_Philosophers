@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 12:42:21 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:49:58 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,12 @@ void* routine(void *args)
 
 	philos = get_struct();
 	philo = (t_philo *) args;
-	if (philo->id % 2 != 0 && philo->eatsnb == philos->eatsnb)
-	{
-		printf("%ld %d is thinking\n", get_Timestamp(philos), philo->id);
-		usleep(10000);
-	}
+	wait_philo(philo, philos);
 	usleep(10000);
-	while(!someone_died(philos) && philo->eatsnb > 0)
-	{
-		if (philo->is_thinking)
-		{
-			if (pthread_mutex_lock(&philo->forkMutex) ==  0)
-			{
-				if (pthread_mutex_lock(&philo->next->forkMutex) == 0)
-				{
-					philo->gotfork_ms = get_Timestamp(philos);
-					usleep(philos->time_eat_ms * 1000);
-					pthread_mutex_unlock(&philo->forkMutex);
-					pthread_mutex_unlock(&philo->next->forkMutex);
-					usleep(1000);
-				}
-			}
-		}
-	}
+	if (philos->eatsnb > 0)
+		routine_whileeat(philos, philo);
+	else
+		routine_whiledeath(philos, philo);
 	return (NULL);
 }
 

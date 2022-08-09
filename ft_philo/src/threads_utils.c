@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 23:10:00 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 12:31:21 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:49:40 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int everybody_ate(t_philosophers *philos)
 	t_philo *philo;
 	int		i;
 
+	if (philos->eatsnb == -1)
+		return (0);
 	i = 0;
 	philo = philos->philo;
 	while (i++ < philos->nb)
@@ -130,4 +132,57 @@ int is_thinking(t_philosophers *philos, t_philo *philo)
 		return (1);
 	}
 	return (0);
+}
+
+void	wait_philo(t_philo *philo, t_philosophers *philos)
+{
+	if (philo->id % 2 != 0 && philo->eatsnb == philos->eatsnb)
+	{
+		printf("%ld %d is thinking\n", get_Timestamp(philos), philo->id);
+		usleep(10000);
+	}
+}
+
+void	routine_whileeat(t_philosophers *philos, t_philo *philo)
+{
+	while(!someone_died(philos) && philo->eatsnb > 0)
+	{
+		if (philo->is_thinking)
+		{
+			if (pthread_mutex_lock(&philo->forkMutex) ==  0)
+			{
+				if (pthread_mutex_lock(&philo->next->forkMutex) == 0)
+				{
+					philo->gotfork_ms = get_Timestamp(philos);
+					usleep(philos->time_eat_ms * 1000);
+					pthread_mutex_unlock(&philo->forkMutex);
+					pthread_mutex_unlock(&philo->next->forkMutex);
+					usleep(1000);
+				}
+			}
+		}
+	}
+	return ;
+}
+
+void	routine_whiledeath(t_philosophers *philos, t_philo *philo)
+{
+	while(!someone_died(philos))
+	{
+		if (philo->is_thinking)
+		{
+			if (pthread_mutex_lock(&philo->forkMutex) ==  0)
+			{
+				if (pthread_mutex_lock(&philo->next->forkMutex) == 0)
+				{
+					philo->gotfork_ms = get_Timestamp(philos);
+					usleep(philos->time_eat_ms * 1000);
+					pthread_mutex_unlock(&philo->forkMutex);
+					pthread_mutex_unlock(&philo->next->forkMutex);
+					usleep(1000);
+				}
+			}
+		}
+	}
+	return ;
 }
