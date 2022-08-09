@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 12:29:10 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:11:17 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	print_data(t_philosophers *philos)
 	i = 0;
 	while (i < philos->nb)
 	{
-		printf("Philosopher %d is set up, they should eat %d times\n",philo->id, philo->eatsnb);
+		printf("Philosopher %d is set up, they should eat %d times\n", philo->id, philo->eatsnb);
 		philo = philo->next;
 		i++;
 	}
@@ -58,8 +58,8 @@ int	main(int ac, char **av)
 	print_data(philos);
 	if (philos->nb != 0 && philos->eatsnb != 0)
 		thread_process(philos);
-	printf("%ld Finish execution\n", get_Timestamp(philos));
+	printf("%ld Finish execution\n", get_tmstmp(philos));
 	print_data(philos);
-	free_philos(philos);	
+	free_philos(philos);
 	return (0);
 }

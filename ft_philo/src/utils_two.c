@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:51:44 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/07 18:22:24 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:01:45 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	check_args(char **av)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
 	while (av[i])
 	{
 		j = 0;
-		while(av[i][j])
+		while (av[i][j])
 		{
 			if (!ft_isdigit(av[i][j]))
 			{
@@ -65,3 +65,9 @@ long int	ft_atoi(const char *nptr)
 	return (nb * positif);
 }
 
+t_philosophers	*get_struct(void)
+{
+	static t_philosophers	philos;
+
+	return (&philos);
+}

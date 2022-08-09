@@ -6,22 +6,20 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:55:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/08 19:09:23 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:09:55 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void philo_process(t_philosophers *philos)
+void	philo_process(t_philosophers *philos, int i)
 {
-	int 	i;
-    t_philo *philo;
-    
-    philo = philos->philo;
-	i = 0;
+	t_philo		*philo;
+
+	philo = philos->philo;
 	while (i++ < philos->nb)
 	{
-        pthread_mutex_init(&philo->forkMutex, NULL);
+		pthread_mutex_init(&philo->fork_mutex, NULL);
 		philo = philo->next;
 	}
 	while (i-- > 1)
@@ -38,32 +36,48 @@ void philo_process(t_philosophers *philos)
 	}
 	while (i-- > 1)
 	{
-		pthread_mutex_destroy(&philo->forkMutex);
+		pthread_mutex_destroy(&philo->fork_mutex);
 		philo = philo->next;
 	}
 }
 
-t_philosophers *get_struct(void)
-{
-    static t_philosophers philos;
-
-    return (&philos);
-}
-
-time_t get_Timestamp(t_philosophers *philos)
+time_t	get_tmstmp(t_philosophers *philos)
 {
 	time_t			mili;
-	
-    mili = now() - philos->today;
-    return (mili); 
+
+	mili = now() - philos->today;
+	return (mili);
 }
 
-time_t now(void)
+time_t	now(void)
 {
 	struct timeval	current_time;
 	time_t			mili;
 
 	gettimeofday(&current_time, NULL);
-	mili = current_time.tv_sec * (time_t)1000 + current_time.tv_usec / (time_t)1000;
+	mili = current_time.tv_sec
+		* (time_t)1000 + current_time.tv_usec / (time_t)1000;
 	return (mili);
+}
+
+void	routine_whiledeath(t_philosophers *philos, t_philo *philo)
+{
+	while (!someone_died(philos))
+	{
+		if (philo->is_thinking)
+		{
+			if (pthread_mutex_lock(&philo->fork_mutex) == 0)
+			{
+				if (pthread_mutex_lock(&philo->next->fork_mutex) == 0)
+				{
+					philo->gotfork_ms = get_tmstmp(philos);
+					usleep(philos->time_eat_ms * 1000);
+					pthread_mutex_unlock(&philo->fork_mutex);
+					pthread_mutex_unlock(&philo->next->fork_mutex);
+					usleep(1000);
+				}
+			}
+		}
+	}
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:58:29 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 12:30:07 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:13:27 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,9 @@ t_philo	*philo_addlast(t_philo *philo, t_philosophers *philos, int i)
 	return (first);
 }
 
-t_philo	*create_philos(char **av, t_philosophers *philos)
+t_philo	*create_philos(char **av, t_philosophers *philos, int i)
 {
 	t_philo	*philo;
-	int		i;
 
 	philo = (t_philo *)malloc(sizeof(t_philo));
 	if (!philo)
@@ -84,7 +83,6 @@ t_philo	*create_philos(char **av, t_philosophers *philos)
 	philo->eatsnb = philos->eatsnb;
 	philo->next = NULL;
 	philo->prev = NULL;
-	i = 1;
 	while (i < ft_atoi(av[1]) - 1)
 	{
 		philo = philo_lstaddback(philo, philos, i);
@@ -99,6 +97,7 @@ t_philo	*create_philos(char **av, t_philosophers *philos)
 t_philosophers	*set_data(int ac, char **av)
 {
 	t_philosophers	*philos;
+	int				i;
 
 	philos = get_struct();
 	if (!philos)
@@ -112,7 +111,8 @@ t_philosophers	*set_data(int ac, char **av)
 		philos->eatsnb = ft_atoi(av[5]);
 	else
 		philos->eatsnb = -1;
-	philos->philo = create_philos(av, philos);
+	i = 1;
+	philos->philo = create_philos(av, philos, 1);
 	if (!philos->philo)
 		return (NULL);
 	return (philos);

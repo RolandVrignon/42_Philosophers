@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 12:28:07 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/09 13:00:11 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 typedef struct s_philo
 {
 	pthread_t				th;
-	pthread_mutex_t 		forkMutex;
+	pthread_mutex_t			fork_mutex;
 	int						id;
 	int						is_dead;
 	__useconds_t			gotfork_ms;
@@ -39,7 +39,7 @@ typedef struct s_philo
 	int						eatsnb;
 	struct s_philo			*next;
 	struct s_philo			*prev;
-	struct s_philosophers 	*philos;
+	struct s_philosophers	*philos;
 }	t_philo;
 
 typedef struct s_philosophers
@@ -50,7 +50,7 @@ typedef struct s_philosophers
 	int				time_sleep_ms;
 	int				eatsnb;
 	time_t			today;
-	pthread_mutex_t	printfMutex;
+	pthread_mutex_t	printf_mutex;
 	t_philo			*philo;
 }	t_philosophers;
 
