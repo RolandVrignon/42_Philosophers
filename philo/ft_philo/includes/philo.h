@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:57:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/14 23:32:55 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 00:51:23 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,5 @@ int				everybody_ate(t_philosophers *philos, t_philo *philo);
 void	        unlock_forks(t_philosophers *philos, t_philo *philo);
 
 // ------------- Tests
-
-void            util_one(t_philo *philo);
-
-void            util_two(t_philo *philo);
-
-void            util_three(t_philo *philo);
-
-void            util_four(t_philo *philo);
-
-void            util_five(t_philo *philo);
-
-void            util_six(t_philo *philo);
-
-void            util_seven(t_philo *philo);
 
 #endif

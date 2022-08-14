@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/15 00:31:24 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 00:50:56 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@ void	unlock_forks(t_philosophers *philos, t_philo *philo)
 	{
 		if (pthread_mutex_lock(&philo->status_mutex) == 0)
 		{
-			if (philo->status == eat || philo->status == fork_two || philo->status == ready_to_eat)
+			if (philo->status == eat || philo->status == ready_to_eat)
 			{
 				pthread_mutex_unlock(&philo->fork_mutex);
 				pthread_mutex_unlock(&philo->next->fork_mutex);
 			}
-			else if (philo->status == fork_one || philo->status == wait_one)
-				pthread_mutex_unlock(&philo->fork_mutex);
-			pthread_mutex_unlock(&philo->status_mutex);
 		}
 		philo = philo->next;
 	}
@@ -51,7 +48,7 @@ void	*routine(void *args)
 		if (kill_process(philos, philo))
 			return (NULL);
 		else if ((get_status(philo, think) || get_status(philo, start)) && !get_status(philo, died))
-			set_status(philo, fork_one);
+			set_status(philo, ready_to_fork);
 		usleep(10000);
 	}
 	return (NULL);
@@ -84,7 +81,7 @@ void	*log_philo(void *args)
 				philo->start_thinking_ms = 0;
 				printf("%ld %d is thinking\n", get_tmstmp(), philo->id);
 			}
-			if (philo->status == fork_one && !get_status(philo->next, eat) && !get_status(philo->prev, eat))
+			if (philo->status == ready_to_fork && !get_status(philo->next, eat) && !get_status(philo->prev, eat))
 			{
 				pthread_mutex_lock(&philo->fork_mutex);
 				pthread_mutex_lock(&philo->next->fork_mutex);

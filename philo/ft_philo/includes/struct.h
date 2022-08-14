@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/14 23:10:08 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 00:49:33 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@
 
 typedef enum e_status {
 	think,
-	fork_one,
-	wait_one,
-	fork_two,
+	ready_to_fork,
 	ready_to_eat,
 	eat,
 	sleeps,
