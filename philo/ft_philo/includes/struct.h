@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 14:22:43 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/14 15:47:05 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,31 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+typedef enum e_status {
+	think,
+	fork_one,
+	wait_one,
+	fork_two,
+	ready_to_eat,
+	eat,
+	sleeps,
+	died,
+	done,
+	start,
+}	t_status;
+
 typedef struct s_philo
 {
 	pthread_t				th;
 	pthread_mutex_t			fork_mutex;
-	pthread_mutex_t			philo_mutex;
+	pthread_mutex_t			status_mutex;
 	int						id;
 	int						is_dead;
-	__useconds_t			gotfork_ms;
-	int						is_eating;
-	__useconds_t			gotsleep_ms;
-	int						is_sleeping;
-	__useconds_t			start_thinking_ms;
-	int						is_thinking;
 	int						eatsnb;
+	t_status				status;
+	__useconds_t			gotfork_ms;
+	__useconds_t			gotsleep_ms;
+	__useconds_t			start_thinking_ms;
 	struct s_philo			*next;
 	struct s_philo			*prev;
 	struct s_philosophers	*philos;

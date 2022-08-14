@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:58:29 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 13:16:17 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/14 14:48:49 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,10 @@ t_philo	*philo_lstaddback(t_philo *phil, t_philosophers *philos, int i)
 		return (NULL);
 	tmp->id = i + 1;
 	tmp->is_dead = 0;
+	tmp->eatsnb = philos->eatsnb;
 	tmp->gotfork_ms = 0;
 	tmp->gotsleep_ms = 0;
-	tmp->is_eating = 0;
-	tmp->is_sleeping = 0;
-	tmp->is_thinking = 1;
 	tmp->start_thinking_ms = 0;
-	tmp->eatsnb = philos->eatsnb;
 	tmp->prev = phil;
 	tmp->next = NULL;
 	phil->next = tmp;
@@ -51,13 +48,10 @@ t_philo	*philo_addlast(t_philo *philo, t_philosophers *philos, int i)
 		return (NULL);
 	tmp->id = i + 1;
 	tmp->is_dead = 0;
+	tmp->eatsnb = philos->eatsnb;
 	tmp->gotfork_ms = 0;
 	tmp->gotsleep_ms = 0;
-	tmp->is_eating = 0;
-	tmp->is_sleeping = 0;
-	tmp->is_thinking = 1;
 	tmp->start_thinking_ms = 0;
-	tmp->eatsnb = philos->eatsnb;
 	tmp->prev = philo;
 	tmp->next = first;
 	philo->next = tmp;
@@ -74,13 +68,10 @@ t_philo	*create_philos(char **av, t_philosophers *philos, int i)
 		return (NULL);
 	philo->id = 1;
 	philo->is_dead = 0;
+	philo->eatsnb = philos->eatsnb;
 	philo->gotfork_ms = 0;
 	philo->gotsleep_ms = 0;
-	philo->is_eating = 0;
-	philo->is_sleeping = 0;
 	philo->start_thinking_ms = 0;
-	philo->is_thinking = 1;
-	philo->eatsnb = philos->eatsnb;
 	philo->next = NULL;
 	philo->prev = NULL;
 	while (i < ft_atoi(av[1]) - 1)

@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:57:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 13:13:43 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/14 15:21:22 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@
 int				usage(void);
 
 void			print_data(t_philosophers *philos);
-
-void			*routine(void *args);
-
-void			*log_philo(void *args);
-
-t_philosophers	*get_struct(void);
 
 t_philosophers	*get_struct(void);
 
@@ -43,7 +37,7 @@ int				check_args(char **av);
 
 int				ft_isdigit(int c);
 
-time_t			get_tmstmp(t_philosophers *philos);
+time_t			get_tmstmp(void);
 
 time_t			now(void);
 
@@ -55,28 +49,19 @@ void			thread_process(t_philosophers *philos);
 
 void			philo_process(t_philosophers *philos, int i);
 
-void			routine_whileeat(t_philosophers *philos, t_philo *philo);
+void			*routine(void *args);
 
-void			routine_whiledeath(t_philosophers *philos, t_philo *philo);
+void			*log_philo(void *args);
 
 // ------------ Threads Utils
 
-int				someone_died(t_philosophers *philos);
+int             get_status(t_philo *philo, t_status status);
 
-int				everybody_ate(t_philosophers *philos);
+void            set_status(t_philo *philo, t_status status);
 
-int				he_died(t_philosophers *philos, t_philo *philo);
+int             kill_proces(t_philosophers *philos, t_philo *philo);
 
-int				he_finished_eating(t_philosophers *philos, t_philo *philo);
+int             someone_died(t_philosophers *philos, t_philo *philo);
 
-int				he_finished_sleeping(t_philosophers *philos, t_philo *philo);
-
-int				is_thinking(t_philosophers *philos, t_philo *philo);
-
-int				has_fork(t_philosophers *philos, t_philo *philo);
-
-int				is_sleeping(t_philosophers *philos, t_philo *philo);
-
-void			wait_philo(t_philo *philo, t_philosophers *philos);
-
+int             everybody_ate(t_philosophers *philos, t_philo *philo);
 #endif

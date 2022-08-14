@@ -6,11 +6,21 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/09 14:19:23 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/14 15:27:29 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/philo.h"
+
+// 0 => is thinking
+// 1 => has one fork
+// 2 => wait_one
+// 3 => has two forks
+// 4 => wait_two
+// 5 => is_eating
+// 6 => is_sleeping
+// 7 => died
+// 8 => done
 
 // ac = 1 => number_of_philosophers
 // ac = 2 => time_to_die
@@ -55,10 +65,10 @@ int	main(int ac, char **av)
 	philos = set_data(ac, av);
 	if (!philos)
 		return (0);
-	print_data(philos);
+	// print_data(philos);
 	if (philos->nb != 0 && philos->eatsnb != 0)
 		thread_process(philos);
-	print_data(philos);
+	// print_data(philos);
 	free_philos(philos);
 	return (0);
 }
