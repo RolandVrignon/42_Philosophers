@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:57:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/14 16:18:18 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/14 17:27:02 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ long int		ft_atoi(const char *nptr);
 
 // ---------- Threads Process
 
-void            lonely_process(t_philosophers *philos);
+void			lonely_process(t_philosophers *philos);
 
 void			thread_process(t_philosophers *philos);
 
-void			philo_process(t_philosophers *philos, int i);
+void			philo_process(t_philosophers *philos, t_philo *philo, int i);
 
 void			*routine(void *args);
 
@@ -57,13 +57,13 @@ void			*log_philo(void *args);
 
 // ------------ Threads Utils
 
-int             get_status(t_philo *philo, t_status status);
+int				get_status(t_philo *philo, t_status status);
 
-void            set_status(t_philo *philo, t_status status);
+void			set_status(t_philo *philo, t_status status);
 
-int             kill_proces(t_philosophers *philos, t_philo *philo);
+int				kill_process(t_philosophers *philos, t_philo *philo);
 
-int             someone_died(t_philosophers *philos, t_philo *philo);
+int				someone_died(t_philosophers *philos, t_philo *philo);
 
-int             everybody_ate(t_philosophers *philos, t_philo *philo);
+int				everybody_ate(t_philosophers *philos, t_philo *philo);
 #endif
