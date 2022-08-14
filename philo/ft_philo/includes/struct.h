@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/14 16:09:32 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/14 23:10:08 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_philosophers
 	int				time_eat_ms;
 	int				time_sleep_ms;
 	int				eatsnb;
+	int				finish;
 	time_t			today;
 	t_philo			*philo;
 }	t_philosophers;

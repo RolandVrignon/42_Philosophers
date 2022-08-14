@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/14 22:43:20 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 00:31:24 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,12 @@ void	*routine(void *args)
 	philo = (t_philo *) args;
 	if (philo->id % 2 != 0)
 		usleep(15000);
-	while (!get_status(philo, died))
+	while (1)
 	{
 		if (kill_process(philos, philo))
 			return (NULL);
 		else if ((get_status(philo, think) || get_status(philo, start)) && !get_status(philo, died))
-		{
-			if (pthread_mutex_lock(&philo->fork_mutex) == 0)
-				set_status(philo, fork_one);
-		}
-		else if (get_status(philo, wait_one) && !get_status(philo, died))
-		{
-			if (pthread_mutex_lock(&philo->next->fork_mutex) == 0)
-				set_status(philo, fork_two);
-		}
+			set_status(philo, fork_one);
 		usleep(10000);
 	}
 	return (NULL);
@@ -92,14 +84,12 @@ void	*log_philo(void *args)
 				philo->start_thinking_ms = 0;
 				printf("%ld %d is thinking\n", get_tmstmp(), philo->id);
 			}
-			if (philo->status == fork_one)
+			if (philo->status == fork_one && !get_status(philo->next, eat) && !get_status(philo->prev, eat))
 			{
-				philo->status = wait_one;
-				printf("%ld %d has taken a fork\n", get_tmstmp(), philo->id);
-			}
-			if (philo->status == fork_two)
-			{
+				pthread_mutex_lock(&philo->fork_mutex);
+				pthread_mutex_lock(&philo->next->fork_mutex);
 				philo->status = ready_to_eat;
+				printf("%ld %d has taken a fork\n", get_tmstmp(), philo->id);
 				printf("%ld %d has taken a fork\n", get_tmstmp(), philo->id);
 			}
 			if (philo->status == ready_to_eat)

@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 23:10:00 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/14 22:42:55 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 00:30:07 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	set_status(t_philo *philo, t_status status)
 int	kill_process(t_philosophers *philos, t_philo *philo)
 {
 	if (someone_died(philos, philo))
-			return (1);
+		return (1);
 	if (philos->eatsnb > 0 && everybody_ate(philos, philo))
-			return (1);
+		return (1);
 	return (0);
 }
 
