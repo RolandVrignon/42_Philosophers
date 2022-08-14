@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:57:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/14 15:21:22 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/14 16:18:18 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ time_t			now(void);
 long int		ft_atoi(const char *nptr);
 
 // ---------- Threads Process
+
+void            lonely_process(t_philosophers *philos);
 
 void			thread_process(t_philosophers *philos);
 

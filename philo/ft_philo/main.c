@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/14 15:27:29 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/14 16:20:18 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ int	main(int ac, char **av)
 	if (!philos)
 		return (0);
 	// print_data(philos);
-	if (philos->nb != 0 && philos->eatsnb != 0)
+	if (philos->nb > 1)
 		thread_process(philos);
+	else
+		lonely_process(philos);
 	// print_data(philos);
 	free_philos(philos);
 	return (0);

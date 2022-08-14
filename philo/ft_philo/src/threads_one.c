@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/14 16:04:39 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/14 16:19:11 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,13 @@ void	*log_philo(void *args)
 	return (NULL);
 }
 
+void	lonely_process(t_philosophers *philos)
+{	
+	printf("%ld 1 has taken a fork\n", get_tmstmp());
+	usleep(philos->time_die_ms * 1000);
+	printf("%ld 1 died\n", get_tmstmp());
+}
+
 void	thread_process(t_philosophers *philos)
 {	
 	pthread_t	logth;
@@ -112,11 +119,9 @@ void	thread_process(t_philosophers *philos)
 	i = 0;
 	if (pthread_create(&logth, NULL, &log_philo, (void *)philos) != 0)
 		perror("Failed to create thread");
-	pthread_mutex_init(&philos->printf_mutex, NULL);
 	philo_process(philos, i);
 	if (pthread_join(logth, NULL) != 0)
 		perror("Failed to join thread");
-	pthread_mutex_destroy(&philos->printf_mutex);
 }
 
 void	philo_process(t_philosophers *philos, int i)
