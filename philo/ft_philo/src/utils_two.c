@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:51:44 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/14 12:20:02 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 13:16:36 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,5 @@ time_t	get_tmstmp(void)
 
 	philos = get_struct();
 	mili = now() - philos->today;
-	return (mili);
-}
-
-time_t	now(void)
-{
-	struct timeval	current_time;
-	time_t			mili;
-
-	gettimeofday(&current_time, NULL);
-	mili = current_time.tv_sec
-		* (time_t)1000 + current_time.tv_usec / (time_t)1000;
 	return (mili);
 }

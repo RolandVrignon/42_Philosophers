@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:57:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/15 12:56:55 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 14:09:10 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,26 @@ void			set_status(t_philo *philo, t_status status);
 
 int				kill_process(int eat, t_philo *philo);
 
-int             is_finish(t_philosophers *philos);
+int				is_finish(t_philosophers *philos);
 
-void            set_finish(t_philosophers *philos);
+void			set_finish(t_philosophers *philos);
 
 int				someone_died(t_philo *philo);
 
 int				everybody_ate(t_philo *philo);
 
-void	        unlock_forks(t_philosophers *philos, t_philo *philo);
-
 // ------------- Tests
+
+int				is_dead(t_philo *philo);
+
+int				can_eat(t_philo *philo);
+
+int				finish_eating(t_philo *philo);
+
+int				finish_sleeping(t_philo *philo);
+
+void			one(t_philo *philo);
+
+void			two(t_philo *philo);
 
 #endif
