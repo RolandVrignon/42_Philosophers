@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/15 12:45:28 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 12:56:16 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	*routine(void *args)
 		usleep(15000);
 	while (1)
 	{
-		if (philos->finish)
+		if (is_finish(philos))
 			return (NULL);
 		else if (get_status(philo, think) || get_status(philo, start))
 			set_status(philo, ready_to_fork);
@@ -65,7 +65,7 @@ void	*log_philo(void *args)
 	{
 		if (kill_process(philos->eatsnb, philo))
 		{
-			philos->finish++;
+			set_finish(philos);
 			break ;
 		}
 		else if (pthread_mutex_lock(&philo->status_mutex) == 0)
@@ -134,11 +134,13 @@ void	thread_process(t_philosophers *philos)
 
 	i = 0;
 	philo = philos->philo;
+	pthread_mutex_init(&philos->global_mutex, NULL);
 	if (pthread_create(&logth, NULL, &log_philo, (void *)philos) != 0)
 		perror("Failed to create thread");
 	philo_process(philos, philo, i);
 	if (pthread_join(logth, NULL) != 0)
 		perror("Failed to join thread");
+	pthread_mutex_destroy(&philos->global_mutex);
 }
 
 void	philo_process(t_philosophers *philos, t_philo *philo, int i)

@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 23:10:00 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/15 12:41:25 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 12:56:47 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,27 @@ void	set_status(t_philo *philo, t_status status)
 	if (pthread_mutex_lock(&philo->status_mutex) == 0)
 		philo->status = status;
 	pthread_mutex_unlock(&philo->status_mutex);
+}
+
+int is_finish(t_philosophers *philos)
+{
+	int value;
+	
+	if (pthread_mutex_lock(&philos->global_mutex) == 0)
+	{
+		value = philos->finish;
+		pthread_mutex_unlock(&philos->global_mutex);	
+	}
+	return (value);
+}
+
+void set_finish(t_philosophers *philos)
+{
+	if (pthread_mutex_lock(&philos->global_mutex) == 0)
+	{
+		philos->finish++;
+		pthread_mutex_unlock(&philos->global_mutex);	
+	}
 }
 
 int	kill_process(int eat, t_philo *philo)

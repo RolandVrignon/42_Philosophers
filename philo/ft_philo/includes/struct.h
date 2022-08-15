@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:43:26 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/15 00:49:33 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 12:52:33 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_philosophers
 	int				finish;
 	time_t			today;
 	t_philo			*philo;
+	pthread_mutex_t	global_mutex;
 }	t_philosophers;
 
 #endif
