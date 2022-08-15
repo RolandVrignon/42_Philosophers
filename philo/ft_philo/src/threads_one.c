@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 18:17:05 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/15 00:50:56 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/08/15 12:45:28 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ void	*routine(void *args)
 {
 	t_philosophers	*philos;
 	t_philo			*philo;
-
+	
 	philos = get_struct();
 	philo = (t_philo *) args;
 	if (philo->id % 2 != 0)
 		usleep(15000);
 	while (1)
 	{
-		if (kill_process(philos, philo))
+		if (philos->finish)
 			return (NULL);
-		else if ((get_status(philo, think) || get_status(philo, start)) && !get_status(philo, died))
+		else if (get_status(philo, think) || get_status(philo, start))
 			set_status(philo, ready_to_fork);
 		usleep(10000);
 	}
@@ -61,11 +61,13 @@ void	*log_philo(void *args)
 
 	philos = (t_philosophers *)args;
 	philo = philos->philo;
-	usleep(1000);
 	while (1)
 	{
-		if (kill_process(philos, philo))
-			return (NULL);
+		if (kill_process(philos->eatsnb, philo))
+		{
+			philos->finish++;
+			break ;
+		}
 		else if (pthread_mutex_lock(&philo->status_mutex) == 0)
 		{
 			if (philo->eatsnb == 0)
@@ -73,7 +75,6 @@ void	*log_philo(void *args)
 			if (philo->status != done && get_tmstmp() - philo->gotfork_ms >= philos->time_die_ms)
 			{
 				philo->status = died;
-				unlock_forks(philos, philo);
 				printf("%ld %d died\n", get_tmstmp(), philo->id);
 			}
 			if (philo->status == think && philo->start_thinking_ms != 0)
