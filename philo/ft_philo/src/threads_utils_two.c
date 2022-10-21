@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:03:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/15 13:12:48 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:29:02 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,20 @@
 int	is_dead(t_philo *philo)
 {
 	t_philosophers	*philos;
+	int				value;
 
 	philos = get_struct();
-	if (get_tmstmp() - philo->gotfork_ms >= philos->time_die_ms)
-		return (1);
-	return (0);
+	value = 0;
+	if (pthread_mutex_lock(&philos->global_mutex) == 0)
+	{
+		if (get_tmstmp() - philo->gotfork_ms >= philos->time_die_ms)
+		{
+			philos->finish = 1;
+			value = 1;
+		}
+		pthread_mutex_unlock(&philos->global_mutex);
+	}
+	return (value);
 }
 
 int	can_eat(t_philo *philo)
@@ -49,19 +58,14 @@ int	finish_sleeping(t_philo *philo)
 	return (0);
 }
 
-int	someone_died(t_philo *philo)
+int	someone_died(t_philosophers *philos)
 {
-	int	id;
+	int	value;
 
-	id = philo->id;
-	philo = philo->next;
-	if (get_status(philo, died))
-		return (1);
-	while (philo->id != id)
+	if (pthread_mutex_lock(&philos->global_mutex) == 0)
 	{
-		if (get_status(philo, died))
-			return (1);
-		philo = philo->next;
+		value = philos->finish;
+		pthread_mutex_unlock(&philos->global_mutex);
 	}
-	return (0);
+	return (value);
 }

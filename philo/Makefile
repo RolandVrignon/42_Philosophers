@@ -6,7 +6,7 @@
 #    By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/02 17:40:10 by rvrignon          #+#    #+#              #
-#    Updated: 2022/08/09 13:40:20 by rvrignon         ###   ########.fr        #
+#    Updated: 2022/10/21 13:32:15 by rvrignon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC =  	ft_philo/main.c \
 OBJ		=	$(SRC:.c=.o)
 CC		=	gcc
 RM		=	rm -f
-CFLAGS	=	-Wall -Werror -Wextra -g -pthread
+CFLAGS	=	-fsanitize=thread -Wall -Werror -Wextra -g -pthread
 
 NAME	=	ft_philo/philo.a
 

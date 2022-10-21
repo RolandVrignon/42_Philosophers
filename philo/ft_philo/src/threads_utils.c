@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 23:10:00 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/15 13:08:50 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:51:38 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	get_status(t_philo *philo, t_status status)
 		test = philo->status;
 		if (test == status)
 			return_val = 1;
+		pthread_mutex_unlock(&philo->status_mutex);
 	}
-	pthread_mutex_unlock(&philo->status_mutex);
 	return (return_val);
 }
 
@@ -56,11 +56,20 @@ void	set_finish(t_philosophers *philos)
 	}
 }
 
-int	kill_process(int eat, t_philo *philo)
+int	kill_process(t_philosophers *philos, t_philo *philo)
 {
-	if (someone_died(philo))
+	int	value;
+	int	nb;
+
+	value = 0;
+	if (someone_died(philos))
 		return (1);
-	if (eat > 0 && everybody_ate(philo))
-		return (1);
-	return (0);
+	if (pthread_mutex_lock(&philos->global_mutex) == 0)
+	{
+		nb = philos->nb;
+		if (philos->eatsnb > 0 && everybody_ate(philo, nb))
+			value = 1;
+		pthread_mutex_unlock(&philos->global_mutex);
+	}
+	return (value);
 }

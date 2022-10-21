@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:55:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/08/15 14:09:01 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:52:02 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,18 @@ void	two(t_philo *philo)
 	}
 }
 
-int	everybody_ate(t_philo *philo)
+int	everybody_ate(t_philo *philo, int nb)
 {
-	int	id;
+	int				i;
 
-	id = philo->id;
+	i = 0;
 	philo = philo->next;
-	while (philo->id != id)
+	while (i < nb)
 	{
 		if (!get_status(philo, done))
 			return (0);
 		philo = philo->next;
+		i++;
 	}
 	if (!get_status(philo, done))
 		return (0);
