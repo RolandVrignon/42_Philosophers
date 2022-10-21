@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:51:44 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/10/21 14:12:03 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:27:58 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int	check_args(char **av)
 				return (0);
 			}
 			j++;
+		}
+		if (ft_atoi(av[i]) < 1)
+		{
+			printf("One of args is lower than 1\n");
+			return (0);
 		}
 		i++;
 	}

@@ -6,13 +6,13 @@
 #    By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 14:32:28 by rvrignon          #+#    #+#              #
-#    Updated: 2022/10/21 14:40:47 by rvrignon         ###   ########.fr        #
+#    Updated: 2022/10/22 01:54:55 by rvrignon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### COMPILATION ###
 CC				= 	gcc
-FLAGS			= 	-Wall -Wextra -Werror -pthread
+FLAGS			= 	-fsanitize=thread -Wall -Wextra -Werror -pthread
 
 ### EXECUTABLE ###
 NAME			= 	philo
@@ -50,7 +50,7 @@ WHITE			= 	\033[1;37m
 all: 	$(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $^ $(CFLAGS) -o $(NAME)
+	@$(CC) $^ $(FLAGS) -o $(NAME)
 	@echo "$(GREEN)$@ ✅$(NOC)"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INCLUDE)/$(NAME).h

@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:03:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/10/21 14:11:57 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/10/22 01:48:11 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ int	is_dead(t_philo *philo)
 
 int	can_eat(t_philo *philo)
 {
-	if (!get_status(philo->next, eat) && !get_status(philo->prev, eat))
+	t_philosophers	*philos;
+	unsigned int	gotsleep;
+
+	philos = get_struct();
+	gotsleep = philo->gotsleep_ms;
+	if (gotsleep == 1 || get_tmstmp() - gotsleep > philos->time_eat_ms)
 		return (1);
 	return (0);
 }

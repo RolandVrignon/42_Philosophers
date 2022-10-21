@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:57:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/10/21 14:35:36 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/10/22 01:47:15 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,9 @@ void			*log_philo(void *args);
 
 int				get_status(t_philo *philo, t_status status);
 
-void			set_status(t_philo *philo, t_status status);
-
-int				kill_process(t_philosophers *philos, t_philo *philo);
-
-int				is_finish(t_philosophers *philos);
-
 void			set_finish(t_philosophers *philos);
 
 int				someone_died(t_philosophers *philos);
-
-int				everybody_ate(t_philo *philo, int nb);
-
-// ------------- Tests
 
 int				is_dead(t_philo *philo);
 
@@ -81,8 +71,10 @@ int				finish_eating(t_philo *philo);
 
 int				finish_sleeping(t_philo *philo);
 
-void			one(t_philo *philo);
+void			define_status(t_philo *philo);
 
-void			two(t_philo *philo);
+void			define_status_two(t_philo *philo);
+
+void			printphilo(t_philo *philo);
 
 #endif
