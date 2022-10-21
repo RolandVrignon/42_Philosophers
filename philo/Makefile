@@ -6,7 +6,7 @@
 #    By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 14:32:28 by rvrignon          #+#    #+#              #
-#    Updated: 2022/10/21 14:36:12 by rvrignon         ###   ########.fr        #
+#    Updated: 2022/10/21 14:40:47 by rvrignon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ WHITE			= 	\033[1;37m
 all: 	$(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(OBJ) $(CFLAGS) -o $(NAME)
+	@$(CC) $^ $(CFLAGS) -o $(NAME)
 	@echo "$(GREEN)$@ ✅$(NOC)"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INCLUDE)/$(NAME).h
