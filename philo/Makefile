@@ -5,53 +5,81 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/02 17:40:10 by rvrignon          #+#    #+#              #
-#    Updated: 2022/10/21 13:32:15 by rvrignon         ###   ########.fr        #
+#    Created: 2022/10/21 14:32:28 by rvrignon          #+#    #+#              #
+#    Updated: 2022/10/21 14:36:12 by rvrignon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC =  	ft_philo/main.c \
-		ft_philo/src/utils.c \
-		ft_philo/src/utils_two.c \
-		ft_philo/src/threads_one.c \
-		ft_philo/src/threads_two.c \
-		ft_philo/src/threads_utils.c \
-		ft_philo/src/threads_utils_two.c \
-		
-OBJ		=	$(SRC:.c=.o)
-CC		=	gcc
-RM		=	rm -f
-CFLAGS	=	-fsanitize=thread -Wall -Werror -Wextra -g -pthread
+### COMPILATION ###
+CC				= 	gcc
+FLAGS			= 	-Wall -Wextra -Werror -pthread
 
-NAME	=	ft_philo/philo.a
+### EXECUTABLE ###
+NAME			= 	philo
 
-PROG	=	philo
+### PATHS ###
+INCLUDE			= 	includes
+SRC_PATH		= 	src
+OBJ_PATH		= 	obj
 
-all:		$(NAME)
+### SOURCE FILES ###
+SOURCES			 =	main.c \
+					threads_one.c \
+					threads_two.c \
+					threads_utils.c \
+					threads_utils_two.c \
+					utils.c \
+					utils_two.c \
 
-$(NAME):	$(OBJ)
-			@ar rcs $(NAME) $(OBJ)
-			@$(CC) $(CFLAGS) -o $(PROG) $(SRC) $(NAME)
-			@echo "\033[1;32m"
-			@echo "\033[4;36mPHILOO Mandatory"
-			@echo "\033[4;32mGOOD WORK\033[0m"
+### OBJECTS ###
+SRC				= 	$(addprefix $(SRC_PATH)/,$(SOURCES))
+OBJ				= 	$(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
 
-clean:		
-			$(RM) $(NAME) $(OBJ)
-			@echo "\033[1;32m"
-			@echo "\033[4;36mPhilo is now clean!\033[0m"
-			@echo "\033[4;32mGOOD WORK\033[0m"
-			clear
+### COLORS ###
+NOC				= 	\033[0m
+RED				= 	\033[1;31m
+GREEN			= 	\033[1;32m
+YELLOW			= 	\033[1;33m
+BLUE			= 	\033[1;34m
+WHITE			= 	\033[1;37m
 
-fclean:		clean
-			$(RM) $(PROG)
-			$(RM) *.txt
-			@echo "\033[1;32m"
-			@echo "\033[4;36mPHilo is now fcleaned!\033[0m"
-			@echo "\033[4;32mGOOD WORK\033[0m"
-			clear
+### RULES ###
 
+# ------- ALL
 
-re:			fclean $(NAME)
+all: 	$(NAME)
 
-.PHONY:		all clean fclean re
+$(NAME): $(OBJ)
+	@$(CC) $(OBJ) $(CFLAGS) -o $(NAME)
+	@echo "$(GREEN)$@ ✅$(NOC)"
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INCLUDE)/$(NAME).h
+	@mkdir -p obj
+	@$(CC) $(FLAGS) -I$(INCLUDE) -c -o $@ $<
+	@echo "$(BLUE)gcc $(WHITE)$(notdir $@)$(NOC)"
+
+# ------- Clean
+
+clean:
+	@echo "$(RED)clean$(NOC)"
+	@rm -rf $(OBJ_PATH)
+
+fclean: clean
+	@echo "$(RED)fclean$(NOC)"
+	@rm -f $(NAME)
+
+re: fclean all
+
+# ------- Gadget
+
+norm:
+	-@norminette $(SRC_PATH)
+	-@norminette $(INCLUDE)
+
+push: fclean
+	git add .
+	git status
+	git commit -m philo
+	git push
+
+.PHONY:	 default mandatory clean fclean re norm push
