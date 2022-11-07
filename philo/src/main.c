@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:09:49 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/10/21 14:10:43 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:25:30 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	main(int ac, char **av)
 		return (0);
 	philos = set_data(ac, av);
 	if (!philos)
+	{
+		printf("One of args is not an int\n");
 		return (0);
+	}
 	if (philos->nb > 1)
 		thread_process(philos);
 	else

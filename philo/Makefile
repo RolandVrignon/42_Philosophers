@@ -6,13 +6,13 @@
 #    By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 14:32:28 by rvrignon          #+#    #+#              #
-#    Updated: 2022/10/22 01:54:55 by rvrignon         ###   ########.fr        #
+#    Updated: 2022/11/07 17:44:35 by rvrignon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### COMPILATION ###
 CC				= 	gcc
-FLAGS			= 	-fsanitize=thread -Wall -Wextra -Werror -pthread
+FLAGS			= 	-Wall -Wextra -Werror -pthread
 
 ### EXECUTABLE ###
 NAME			= 	philo

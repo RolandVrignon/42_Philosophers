@@ -6,7 +6,7 @@
 /*   By: rvrignon <rvrignon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 13:57:03 by rvrignon          #+#    #+#             */
-/*   Updated: 2022/10/22 01:47:15 by rvrignon         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:19:04 by rvrignon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,27 @@ time_t			now(void);
 
 long int		ft_atoi(const char *nptr);
 
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+
+char			*ft_itoa(long long int n);
+
+size_t			ft_strlen(const char *s);
+
 // ---------- Threads Process
 
 void			lonely_process(t_philosophers *philos);
 
 void			thread_process(t_philosophers *philos);
 
-void			philo_process(t_philosophers *philos, t_philo *philo, int i);
+int				philo_process(t_philosophers *philos, t_philo *philo);
+
+int				philo_thread_create(t_philosophers *philos, t_philo *philo);
+
+int				philo_thread_join(t_philosophers *philos, t_philo *philo);
+
+void			destroy_all_philos_mutex(t_philosophers *philos, t_philo *philo);
+
+void			detach_all_philos(t_philosophers *philos, t_philo *philo);
 
 void			*routine(void *args);
 
